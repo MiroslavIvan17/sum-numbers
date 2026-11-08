@@ -1,14 +1,16 @@
 import random
 
 class NumberGenerator:
-    def __init__(self):
-        self.stack_numbers = []
+    def __init__(self, default_digits=50):
+        self.default_digits = default_digits
 
-    def generator(self, num_digits):
+    def _generator(self, num_digits=None):
         final_number = ""
         sub_number = ""
-        
+        if num_digits is None:
+                num_digits = self.default_digits
         for digits in range(1, num_digits+1):
+           
             if digits == 1:
                 sub_number = str(random.randint(1,9))
             else :
@@ -16,16 +18,15 @@ class NumberGenerator:
             final_number += sub_number
         sign = random.choice(["", "-"]) 
         final_number = sign + final_number 
-        print(final_number)
-        return
-       # self.stack_numbers.append(final_number)
-            
-def number_list():
-    list= []
-    skuska = NumberGenerator()
-    for i in range(1, 51):
-        skuska.generator(i)
-        list.append(skuska)
-    
+        return final_number
+           
+    def number_list(self, count):
+        items= []
+        gen = NumberGenerator()
+        for i in range(1, count+1):
+            number = gen._generator(i)
+            items.append(number)
+        print(items)    
 
-number_list()
+test = NumberGenerator()
+test.number_list(50)
